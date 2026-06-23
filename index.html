@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Product Visualization — Portfolio</title>
+<meta name="description" content="Interactive product exposure samples: 360° rotation capture and real-time glTF viewer." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="site-header">
+  <div class="mark">PV<span class="mark-dot">·</span>01</div>
+  <nav class="header-nav">
+    <span class="nav-readout" id="clock-readout">[ STANDBY ]</span>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid-bg" id="hero-canvas-wrap" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="eyebrow">PRODUCT EXPOSURE — INTERACTIVE SAMPLES</p>
+      <h1 class="hero-title">Two ways to<br>look closer.</h1>
+      <p class="hero-sub">A 360° photographic rig, and a real-time glTF render. Both are about giving a viewer control over how they see a product — orbit, spin, inspect.</p>
+      <a href="#viewers" class="cta">View the work <span class="cta-arrow">↓</span></a>
+    </div>
+    <div class="hero-coords" aria-hidden="true">
+      <span>LAT 50.0647° N</span>
+      <span>LON 19.9450° E</span>
+      <span>KRAKÓW</span>
+    </div>
+  </section>
+
+  <!-- VIEWERS -->
+  <section class="viewers" id="viewers">
+
+    <!-- VIEWER 01 — 360 ROTATION -->
+    <article class="station">
+      <div class="station-label">
+        <span class="station-tag">[ 01 / CAPTURE ]</span>
+        <h2 class="station-title">360° Rotation</h2>
+      </div>
+
+      <div class="rig" id="rig-360">
+        <span class="bracket bracket-tl"></span>
+        <span class="bracket bracket-tr"></span>
+        <span class="bracket bracket-bl"></span>
+        <span class="bracket bracket-br"></span>
+
+        <div class="rig-readout">
+          <span id="frame-readout">FRAME 001 / 036</span>
+        </div>
+
+        <div class="viewer-360" id="viewer-360">
+          <img id="frame-img" class="frame-img" src="" alt="Product 360 view" draggable="false" />
+          <div class="drag-hint" id="drag-hint">
+            <span class="drag-icon">↔</span>
+            <span>DRAG TO ROTATE</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="station-note">
+        Drag horizontally, or use the slider. Drop your own frame sequence into <code>assets/360/</code> — see the README in that folder for naming and frame-count setup.
+      </p>
+
+      <input type="range" id="frame-slider" class="frame-slider" min="0" max="35" value="0" step="1" aria-label="Rotation angle">
+    </article>
+
+    <!-- VIEWER 02 — GLB MODEL -->
+    <article class="station">
+      <div class="station-label">
+        <span class="station-tag">[ 02 / RENDER ]</span>
+        <h2 class="station-title">glTF Viewer</h2>
+      </div>
+
+      <div class="rig" id="rig-glb">
+        <span class="bracket bracket-tl"></span>
+        <span class="bracket bracket-tr"></span>
+        <span class="bracket bracket-bl"></span>
+        <span class="bracket bracket-br"></span>
+
+        <div class="rig-readout">
+          <span id="model-readout">LOADING…</span>
+        </div>
+
+        <div class="viewer-glb" id="viewer-glb">
+          <canvas id="glb-canvas"></canvas>
+          <div class="loader" id="glb-loader">
+            <div class="loader-bar"><div class="loader-bar-fill" id="loader-fill"></div></div>
+            <span id="loader-text">0%</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="station-note">
+        Orbit with drag, scroll to zoom. Replace <code>assets/models/product.glb</code> with your own model — any reasonably optimized glTF/GLB will work.
+      </p>
+    </article>
+
+  </section>
+
+  <footer class="site-footer">
+    <span>BUILT WITH THREE.JS</span>
+    <span class="footer-dot">·</span>
+    <span id="year"></span>
+  </footer>
+
+</main>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.165.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.165.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module" src="assets/js/main.js"></script>
+</body>
+</html>
