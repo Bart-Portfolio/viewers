@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Product Visualization — Portfolio</title>
+<meta name="description" content="Interactive product exposure samples: 360° rotation capture and real-time glTF viewer." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="mark">Bartek<span class="mark-dot">.</span></div>
+  <nav class="header-nav">
+    <a href="#viewer-360-section">360° Capture</a>
+    <a href="#viewer-glb-section">glTF Viewer</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <p class="eyebrow">Three.js &amp; Web 3D — Portfolio Samples</p>
+    <h1 class="intro-title">Product exposure,<br>presented two ways.</h1>
+    <p class="intro-sub">A 360° photographic turntable, and a real-time glTF render — both built to give a viewer control over how they see a product.</p>
+  </section>
+
+  <!-- PRODUCT 01 — 360 ROTATION -->
+  <section class="product" id="viewer-360-section">
+
+    <div class="product-gallery">
+      <div class="thumb-rail" aria-hidden="true">
+        <span class="thumb active"></span>
+        <span class="thumb"></span>
+        <span class="thumb"></span>
+        <span class="thumb"></span>
+      </div>
+
+      <div class="gallery-main">
+        <div class="viewer-360" id="viewer-360">
+          <img id="frame-img" class="frame-img" src="" alt="Product 360 view" draggable="false" />
+          <div class="drag-hint" id="drag-hint">
+            <span class="drag-icon">↔</span>
+            <span>Drag to rotate</span>
+          </div>
+        </div>
+        <span class="frame-badge" id="frame-readout">Frame 1 / 20</span>
+      </div>
+    </div>
+
+    <div class="product-details">
+      <p class="breadcrumb">Samples / Capture</p>
+      <h2 class="product-title">360° Rotation Viewer</h2>
+      <p class="product-price">Frame-sequence turntable</p>
+
+      <p class="product-desc">
+        A classic ecommerce-style 360° spin, built from a sequence of still photographs rather than a 3D model. Drag across the image, or use the slider below, to rotate through every angle — the same interaction shoppers expect from product pages like this one.
+      </p>
+
+      <input type="range" id="frame-slider" class="frame-slider" min="0" max="19" value="0" step="1" aria-label="Rotation angle">
+
+      <dl class="spec-list">
+        <div class="spec-row"><dt>Format</dt><dd>PNG frame sequence</dd></div>
+        <div class="spec-row"><dt>Frame count</dt><dd>20 images, 18° apart</dd></div>
+        <div class="spec-row"><dt>Interaction</dt><dd>Drag or slider</dd></div>
+        <div class="spec-row"><dt>Source folder</dt><dd><code>assets/360/</code></dd></div>
+      </dl>
+
+      <p class="product-note">Drop your own sequence into <code>assets/360/</code> as <code>frame_001.png</code> … <code>frame_020.png</code> — see the README there for setup notes.</p>
+    </div>
+
+  </section>
+
+  <!-- PRODUCT 02 — GLB MODEL -->
+  <section class="product product-reverse" id="viewer-glb-section">
+
+    <div class="product-gallery">
+      <div class="thumb-rail" aria-hidden="true">
+        <span class="thumb active"></span>
+        <span class="thumb"></span>
+        <span class="thumb"></span>
+      </div>
+
+      <div class="gallery-main">
+        <div class="viewer-glb" id="viewer-glb">
+          <canvas id="glb-canvas"></canvas>
+          <div class="loader" id="glb-loader">
+            <div class="loader-bar"><div class="loader-bar-fill" id="loader-fill"></div></div>
+            <span id="loader-text">0%</span>
+          </div>
+        </div>
+        <span class="frame-badge" id="model-readout">Loading…</span>
+      </div>
+    </div>
+
+    <div class="product-details">
+      <p class="breadcrumb">Samples / Render</p>
+      <h2 class="product-title">glTF Model Viewer</h2>
+      <p class="product-price">Real-time Three.js render</p>
+
+      <p class="product-desc">
+        A real-time 3D viewer built with Three.js, loading an actual glTF/GLB model rather than pre-rendered photos. Orbit around the product freely and zoom in — useful for showing off geometry and material detail a flat photo sequence can't capture.
+      </p>
+
+      <dl class="spec-list">
+        <div class="spec-row"><dt>Format</dt><dd>glTF / GLB (binary)</dd></div>
+        <div class="spec-row"><dt>Engine</dt><dd>Three.js, real-time render</dd></div>
+        <div class="spec-row"><dt>Interaction</dt><dd>Orbit drag, scroll to zoom</dd></div>
+        <div class="spec-row"><dt>Source file</dt><dd><code>assets/models/product.glb</code></dd></div>
+      </dl>
+
+      <p class="product-note">Replace <code>assets/models/product.glb</code> with your own model — any reasonably optimized glTF/GLB will load automatically.</p>
+    </div>
+
+  </section>
+
+  <footer class="site-footer">
+    <span>Built with Three.js</span>
+    <span class="footer-dot">·</span>
+    <span id="year"></span>
+  </footer>
+
+</main>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.165.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.165.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module" src="assets/js/main.js"></script>
+</body>
+</html>
