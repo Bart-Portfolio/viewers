@@ -12,7 +12,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
    VIEWER 01 — 360° FRAME SEQUENCE
 =========================================================== */
 (function init360Viewer(){
-  const FRAME_COUNT = 36; // expects assets/360/frame_001.jpg ... frame_036.jpg
+  const FRAME_COUNT = 20; // expects assets/360/frame_001.jpg ... frame_036.jpg
   const FRAME_PATH = (i) => `assets/360/frame_${String(i).padStart(3,'0')}.png`;
 
   const viewerEl = document.getElementById('viewer-360');
