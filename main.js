@@ -8,23 +8,12 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 =========================================================== */
 document.getElementById('year').textContent = new Date().getFullYear();
 
-const clockEl = document.getElementById('clock-readout');
-function tickClock(){
-  const now = new Date();
-  const hh = String(now.getHours()).padStart(2,'0');
-  const mm = String(now.getMinutes()).padStart(2,'0');
-  const ss = String(now.getSeconds()).padStart(2,'0');
-  clockEl.textContent = `[ ${hh}:${mm}:${ss} ]`;
-}
-tickClock();
-setInterval(tickClock, 1000);
-
 /* ===========================================================
    VIEWER 01 — 360° FRAME SEQUENCE
 =========================================================== */
 (function init360Viewer(){
-  const FRAME_COUNT = 20; // expects assets/360/frame_001.jpg ... frame_020.jpg
-  const FRAME_PATH = (i) => `assets/360/frame_${String(i).padStart(3,'0')}.png`;
+  const FRAME_COUNT = 36; // expects assets/360/frame_001.jpg ... frame_036.jpg
+  const FRAME_PATH = (i) => `assets/360/frame_${String(i).padStart(3,'0')}.jpg`;
 
   const viewerEl = document.getElementById('viewer-360');
   const imgEl = document.getElementById('frame-img');
@@ -55,7 +44,7 @@ setInterval(tickClock, 1000);
     currentFrame = ((index % FRAME_COUNT) + FRAME_COUNT) % FRAME_COUNT;
     imgEl.src = FRAME_PATH(currentFrame + 1);
     slider.value = currentFrame;
-    frameReadout.textContent = `FRAME ${String(currentFrame+1).padStart(3,'0')} / ${String(FRAME_COUNT).padStart(3,'0')}`;
+    frameReadout.textContent = `Frame ${currentFrame + 1} / ${FRAME_COUNT}`;
   }
 
   function markInteracted(){
@@ -94,8 +83,8 @@ setInterval(tickClock, 1000);
 
   // graceful fallback if images are missing
   imgEl.addEventListener('error', () => {
-    frameReadout.textContent = 'NO SEQUENCE FOUND';
-    dragHint.innerHTML = `<span>Drop frame_001.jpg…frame_036.jpg into <code>assets/360/</code></span>`;
+    frameReadout.textContent = 'No sequence found';
+    dragHint.innerHTML = `<span>Drop frame_001.png…frame_020.png into <code>assets/360/</code></span>`;
     dragHint.style.opacity = '1';
   }, { once: true });
 })();
@@ -189,7 +178,7 @@ setInterval(tickClock, 1000);
       scene.add(model);
 
       loaderEl.classList.add('hidden');
-      modelReadout.textContent = 'product.glb · LIVE';
+      modelReadout.textContent = 'product.glb — live';
     },
     (xhr) => {
       if(xhr.total){
@@ -199,8 +188,8 @@ setInterval(tickClock, 1000);
       }
     },
     (err) => {
-      loaderText.textContent = 'MODEL NOT FOUND';
-      modelReadout.textContent = 'NO MODEL LOADED';
+      loaderText.textContent = 'Model not found';
+      modelReadout.textContent = 'No model loaded';
       console.warn('GLB load error — add your file at assets/models/product.glb', err);
 
       // show a placeholder so the rig still feels alive
