@@ -364,3 +364,163 @@ a:focus-visible,
   border-top: 1px solid var(--line);
 }
 .footer-dot{ color: var(--oak); }
+
+/* ===========================================================
+   SHARED SECTION HEADER
+=========================================================== */
+.section-header{
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 2rem 2.5rem;
+  text-align: center;
+}
+.section-title{
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* ===========================================================
+   VIDEO REEL
+=========================================================== */
+.reel-section{
+  padding: 5rem 0 4rem;
+  border-top: 1px solid var(--line);
+}
+
+.reel-wrap{
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.reel-video{
+  display: block;
+  width: 100%;
+  border-radius: var(--radius);
+  background: var(--ink);
+  /* no border, no shadow — let the content breathe */
+}
+
+/* ===========================================================
+   GALLERY
+=========================================================== */
+.gallery-section{
+  padding: 5rem 0 4rem;
+  border-top: 1px solid var(--line);
+}
+
+.gallery-grid{
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 2rem;
+
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 220px;
+  gap: 6px;
+}
+
+/* landscape image: spans 8 cols, 1 row */
+.gi-landscape{
+  grid-column: span 8;
+  grid-row: span 1;
+}
+
+/* square image: spans 4 cols, 1 row */
+.gi-square{
+  grid-column: span 4;
+  grid-row: span 1;
+}
+
+/* explicit placement for a natural mixed flow:
+   row 1: [landscape 8] [square 4]
+   row 2: [square 4] [square 4] [square 4]  → but we only have sq+landscape, so:
+   row 2: [square 4] [landscape 8]
+   row 3: [landscape 8] [square 4]
+   row 4: [square 4] [square 4] [square 4]   (last 3 squares)
+*/
+.gallery-item:nth-child(1)  { grid-column: 1 / span 8; }
+.gallery-item:nth-child(2)  { grid-column: 9 / span 4; }
+.gallery-item:nth-child(3)  { grid-column: 1 / span 4; }
+.gallery-item:nth-child(4)  { grid-column: 5 / span 8; }
+.gallery-item:nth-child(5)  { grid-column: 1 / span 4; }
+.gallery-item:nth-child(6)  { grid-column: 5 / span 8; }
+.gallery-item:nth-child(7)  { grid-column: 1 / span 4; }
+.gallery-item:nth-child(8)  { grid-column: 5 / span 4; }
+.gallery-item:nth-child(9)  { grid-column: 9 / span 4; }
+.gallery-item:nth-child(10) { grid-column: 1 / span 4; }
+
+.gallery-item{
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--line-soft);
+}
+
+.gallery-item img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.gallery-item img.loaded{
+  opacity: 1;
+}
+
+.gallery-item:hover img{
+  transform: scale(1.03);
+}
+
+/* scroll-in fade for gallery items */
+.gallery-item{
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.gallery-item.visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+/* stagger the reveal */
+.gallery-item:nth-child(1)  { transition-delay: 0.00s; }
+.gallery-item:nth-child(2)  { transition-delay: 0.05s; }
+.gallery-item:nth-child(3)  { transition-delay: 0.10s; }
+.gallery-item:nth-child(4)  { transition-delay: 0.08s; }
+.gallery-item:nth-child(5)  { transition-delay: 0.13s; }
+.gallery-item:nth-child(6)  { transition-delay: 0.06s; }
+.gallery-item:nth-child(7)  { transition-delay: 0.11s; }
+.gallery-item:nth-child(8)  { transition-delay: 0.04s; }
+.gallery-item:nth-child(9)  { transition-delay: 0.09s; }
+.gallery-item:nth-child(10) { transition-delay: 0.14s; }
+
+/* --- responsive --- */
+@media (max-width: 700px){
+  .gallery-grid{
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 160px;
+    gap: 4px;
+  }
+  /* reset all explicit placements */
+  .gallery-item,
+  .gi-landscape,
+  .gi-square{ grid-column: span 1; grid-row: span 1; }
+
+  /* make landscapes span 2 cols on mobile */
+  .gi-landscape{ grid-column: span 2; }
+  .gallery-item:nth-child(1),
+  .gallery-item:nth-child(2),
+  .gallery-item:nth-child(3),
+  .gallery-item:nth-child(4),
+  .gallery-item:nth-child(5),
+  .gallery-item:nth-child(6),
+  .gallery-item:nth-child(7),
+  .gallery-item:nth-child(8),
+  .gallery-item:nth-child(9),
+  .gallery-item:nth-child(10){ grid-column: unset; }
+  .gi-landscape{ grid-column: span 2; }
+}

@@ -12,8 +12,8 @@ document.getElementById('year').textContent = new Date().getFullYear();
    VIEWER 01 — 360° FRAME SEQUENCE
 =========================================================== */
 (function init360Viewer(){
-  const FRAME_COUNT = 20; // expects assets/360/frame_001.jpg ... frame_036.jpg
-  const FRAME_PATH = (i) => `assets/360/frame_${String(i).padStart(3,'0')}.png`;
+  const FRAME_COUNT = 36; // expects assets/360/frame_001.jpg ... frame_036.jpg
+  const FRAME_PATH = (i) => `assets/360/frame_${String(i).padStart(3,'0')}.jpg`;
 
   const viewerEl = document.getElementById('viewer-360');
   const imgEl = document.getElementById('frame-img');
@@ -209,4 +209,35 @@ document.getElementById('year').textContent = new Date().getFullYear();
     renderer.render(scene, camera);
   }
   animate();
+})();
+
+
+/* ===========================================================
+   GALLERY — scroll-reveal + image fade-in on load
+=========================================================== */
+(function initGallery(){
+  const items = document.querySelectorAll('.gallery-item');
+
+  // fade each image in once it's actually loaded
+  items.forEach(item => {
+    const img = item.querySelector('img');
+    if(!img) return;
+    if(img.complete && img.naturalWidth > 0){
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', () => img.classList.add('loaded'));
+    }
+  });
+
+  // reveal items as they scroll into view
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  items.forEach(item => observer.observe(item));
 })();

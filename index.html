@@ -19,6 +19,8 @@
   <nav class="header-nav">
     <a href="#viewer-360-section">360° Capture</a>
     <a href="#viewer-glb-section">glTF Viewer</a>
+    <a href="#reel-section">Reel</a>
+    <a href="#gallery-section">Gallery</a>
   </nav>
 </header>
 
@@ -120,6 +122,49 @@
 
   </section>
 
+  <!-- VIDEO REEL -->
+  <section class="reel-section" id="reel-section">
+    <div class="section-header">
+      <p class="eyebrow">Animation</p>
+      <h2 class="section-title">In motion.</h2>
+    </div>
+    <div class="reel-wrap">
+      <video
+        class="reel-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-label="Product animation reel"
+      >
+        <source src="assets/video/reel.webm" type="video/webm" />
+        <source src="assets/video/reel.mp4" type="video/mp4" />
+        Your browser doesn't support HTML video.
+      </video>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery-section" id="gallery-section">
+    <div class="section-header">
+      <p class="eyebrow">Photography</p>
+      <h2 class="section-title">A closer look.</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item gi-landscape"><img src="assets/gallery/gallery_01.jpg" alt="Gallery image 1" loading="lazy" /></div>
+      <div class="gallery-item gi-square">   <img src="assets/gallery/gallery_02.jpg" alt="Gallery image 2" loading="lazy" /></div>
+      <div class="gallery-item gi-square">   <img src="assets/gallery/gallery_03.jpg" alt="Gallery image 3" loading="lazy" /></div>
+      <div class="gallery-item gi-landscape"><img src="assets/gallery/gallery_04.jpg" alt="Gallery image 4" loading="lazy" /></div>
+      <div class="gallery-item gi-square">   <img src="assets/gallery/gallery_05.jpg" alt="Gallery image 5" loading="lazy" /></div>
+      <div class="gallery-item gi-landscape"><img src="assets/gallery/gallery_06.jpg" alt="Gallery image 6" loading="lazy" /></div>
+      <div class="gallery-item gi-square">   <img src="assets/gallery/gallery_07.jpg" alt="Gallery image 7" loading="lazy" /></div>
+      <div class="gallery-item gi-square">   <img src="assets/gallery/gallery_08.jpg" alt="Gallery image 8" loading="lazy" /></div>
+      <div class="gallery-item gi-landscape"><img src="assets/gallery/gallery_09.jpg" alt="Gallery image 9" loading="lazy" /></div>
+      <div class="gallery-item gi-square">   <img src="assets/gallery/gallery_10.jpg" alt="Gallery image 10" loading="lazy" /></div>
+    </div>
+  </section>
+
   <footer class="site-footer">
     <span>Built with Three.js</span>
     <span class="footer-dot">·</span>
@@ -136,6 +181,6 @@
   }
 }
 </script>
-<script type="module" src="main.js"></script>
+<script type="module" src="assets/js/main.js"></script>
 </body>
 </html>
