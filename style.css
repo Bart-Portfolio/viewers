@@ -120,7 +120,7 @@ a{ color: inherit; text-decoration: none; }
   grid-template-columns: 64px 1fr;
   gap: 1rem;
 }
-@media (max-width: 600px){
+@media (max-width: 1200px){
   .product-gallery{ grid-template-columns: 1fr; }
   .thumb-rail{ order: 2; flex-direction: row !important; }
 }
