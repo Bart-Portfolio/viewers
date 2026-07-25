@@ -12,8 +12,8 @@ document.getElementById('year').textContent = new Date().getFullYear();
    VIEWER 01 — 360° FRAME SEQUENCE
 =========================================================== */
 (function init360Viewer(){
-  const FRAME_COUNT = 20; // expects assets/360/frame_001.jpg ... frame_036.jpg
-  const FRAME_PATH = (i) => `assets/360/frame_${String(i).padStart(3,'0')}.png`;
+  const FRAME_COUNT = 36; // expects assets/360/frame_001.jpg ... frame_036.jpg
+  const FRAME_PATH = (i) => `assets/360/frame_${String(i).padStart(3,'0')}.jpg`;
 
   const viewerEl = document.getElementById('viewer-360');
   const imgEl = document.getElementById('frame-img');
@@ -240,4 +240,41 @@ document.getElementById('year').textContent = new Date().getFullYear();
   }, { threshold: 0.1 });
 
   items.forEach(item => observer.observe(item));
+})();
+
+
+/* ===========================================================
+   LIGHTBOX
+=========================================================== */
+(function initLightbox(){
+  const lightbox   = document.getElementById('lightbox');
+  const lbImg      = document.getElementById('lightbox-img');
+  const lbClose    = document.getElementById('lightbox-close');
+  const lbBackdrop = document.getElementById('lightbox-backdrop');
+
+  function open(img){
+    lbImg.src = img.src;
+    lbImg.alt = img.alt;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    lbClose.focus();
+  }
+
+  function close(){
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+
+  // open on gallery image click
+  document.querySelectorAll('.gallery-item img').forEach(img => {
+    img.addEventListener('click', () => open(img));
+  });
+
+  // close on backdrop click, close button, or Escape key
+  lbBackdrop.addEventListener('click', close);
+  lbClose.addEventListener('click', close);
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape' && lightbox.classList.contains('open')) close();
+  });
 })();
